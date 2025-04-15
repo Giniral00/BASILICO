@@ -75,30 +75,33 @@
             opacity: 0.8;
             font-family: Arial, sans-serif;
         }
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-                height: auto;
-                padding: 20px;
-            }
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .box {
-                width: 90%;
-                max-width: 400px;
-            }
-            textarea {
-                height: 150px;
-            }
-            .powered-by {
-                position: static;
-                text-align: center;
-                margin-top: 20px;
-                font-size: 10px;
-            }
+        @media (max-width: 768px) { 
+        body {
+            flex-direction: column;
+            height: auto;
+            padding: 20px;
         }
+
+        .container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .box {
+            width: 90%;
+            max-width: 400px;
+        }
+
+        textarea {
+            height: 150px;
+        }
+        .powered-by {
+        position: static;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 10px;
+    }
+    }
     </style>
 </head>
 <body>
@@ -109,52 +112,52 @@
         <h2>BASILICO score</h2>
     
         <div class="question">
-         <p>Diagnosi pre-operatoria patologia Cardiovascolare</p>
-         <label><input type="radio" name="q1" value="yes"> Sì</label>
+         <p>History of Cardiovascular Disease </p>
+         <label><input type="radio" name="q1" value="yes"> Yes</label>
          <label><input type="radio" name="q1" value="no"> No</label>
         </div>
     
         <div class="question">
-         <p>Diagnosi pre-operatoria BPCO</p>
-         <label><input type="radio" name="q2" value="yes"> Sì</label>
+         <p>History of COPD</p>
+         <label><input type="radio" name="q2" value="yes"> Yes</label>
          <label><input type="radio" name="q2" value="no"> No</label>
         </div>
     
         <div class="question">
-         <p>NPT pre-operatoria</p>
-         <label><input type="radio" name="q3" value="yes"> Sì</label>
+         <p>Preoperative parenteral nutrition TPN</p>
+         <label><input type="radio" name="q3" value="yes"> Yes</label>
          <label><input type="radio" name="q3" value="no"> No</label>
         </div>
 
         <div class="question">
-         <p>Presenza di fistola intra-operatoria</p>
-         <label><input type="radio" name="q4" value="yes"> Sì</label>
+         <p>Intraoperative presence of a Fistula</p>
+         <label><input type="radio" name="q4" value="yes"> Yes</label>
          <label><input type="radio" name="q4" value="no"> No</label>
         </div>
     
-    <button onclick="calcolaPunteggio()">Calcola punteggio</button>
+    <button onclick="calcolaPunteggio()">Calculate Score</button>
     
     <div class="result" id="result"></div>
  </div>
 
     <!-- Box di testo aggiuntivo -->
     <div class="box text-box">
-     <h2>Classi di rischio</h2>
+     <h2>Risk classes</h2>
      <textarea placeholder=
-     "0-5: rischio basso, probabilità da 7% a 11%
-     
-6-10: rischio moderato, probabilità da 12% a 17%
-     
-11-15: rischio elevato, probabilità da 18% a 26%
+     "0-5: low risk, AL probability from 7% to 11%
 
-15-25: rischio significativamente elevato, probabilità da 27% a 50%
+6-10: moderate risk, AL probability from 12% to 17%
+     
+11-15: high risk, AL probability from 18% to 26%
+     
+16-25: significantly high risk, AL probability from 27% to 50%
      "></textarea>
     </div>
 
     <!-- Box di descrizione del punteggio -->
     <div class="box description-box" id="description">
-        <h2>Interpretazione Punteggio</h2>
-        <p id="punteggioDescrizione">Rispondi alle domande per vedere la tua interpretazione!</p>
+        <h2>Score Interpretation</h2>
+        <p id="punteggioDescrizione">Answer the questions to see your score interpretation!</p>
         <img src="https://i.postimg.cc/7hXW5BMC/Figura-2-p-ALIC-score.png"
     </div>
 </div>
@@ -187,7 +190,7 @@
         
         // Controlla se tutte le risposte sono selezionate
         if (!risposta1 || !risposta2 || !risposta3 || !risposta4) {
-            document.getElementById('result').innerText = "Rispondi a tutte le domande!";
+            document.getElementById('result').innerText = "Please answer all the questions!";
             return;
         }
         
@@ -198,62 +201,62 @@
         punteggioTotale += (risposta4.value === 'yes') ? punteggioYes4 : punteggioNo4;
         
         // Mostra il risultato
-        document.getElementById('result').innerText = "Punteggio totale: " + punteggioTotale;
+        document.getElementById('result').innerText = "Score: " + punteggioTotale;
     
         // Aggiorna la descrizione in base al punteggio totale
         let descrizione;
         if (punteggioTotale === 0) {
-            descrizione = "rischio leak anastomotico 6,93%";
+            descrizione = "anastomotic leak risk 6,93%";
         } else if (punteggioTotale === 1) {
-            descrizione = "rischio leak anastomotico 7,63%";
+            descrizione = "anastomotic leak risk 7,63%";
         } else if (punteggioTotale === 2) {
-            descrizione = "rischio leak anastomotico 8,39%";
+            descrizione = "anastomotic leak risk 8,39%";
         } else if (punteggioTotale === 3) {
-            descrizione = "rischio leak anastomotico 9,21%"
+            descrizione = "anastomotic leak risk 9,21%"
         } else if (punteggioTotale === 4) {
-            descrizione = "rischio leak anastomotico 10,11%"
+            descrizione = "anastomotic leak risk 10,11%"
         } else if (punteggioTotale === 5) {
-            descrizione = "rischio leak anastomotico 11,09%";
+            descrizione = "anastomotic leak risk 11,09%";
         } else if (punteggioTotale === 6) {
-            descrizione = "rischio leak anastomotico 12,14%";
+            descrizione = "anastomotic leak risk 12,14%";
         } else if (punteggioTotale === 7) {
-            descrizione = "rischio leak anastomotico 13,29%"
+            descrizione = "anastomotic leak risk 13,29%"
         } else if (punteggioTotale === 8) {
-            descrizione = "rischio leak anastomotico 14,52%"
+            descrizione = "anastomotic leak risk 14,52%"
         } else if (punteggioTotale === 9) {
-            descrizione = "rischio leak anastomotico 15,84%";
+            descrizione = "anastomotic leak risk 15,84%";
         } else if (punteggioTotale === 10) {
-            descrizione = "rischio leak anastomotico 17,27%";
+            descrizione = "anastomotic leak risk 17,27%";
         } else if (punteggioTotale === 11) {
-            descrizione = "rischio leak anastomotico 18,79%"
+            descrizione = "anastomotic leak risk 18,79%"
         } else if (punteggioTotale === 12) {
-            descrizione = "rischio leak anastomotico 20,41%"
+            descrizione = "anastomotic leak risk 20,41%"
         } else if (punteggioTotale === 13) {
-            descrizione = "rischio leak anastomotico 22,13%";
+            descrizione = "anastomotic leak risk 22,13%";
         } else if (punteggioTotale === 14) {
-            descrizione = "rischio leak anastomotico 23,96%";
+            descrizione = "anastomotic leak risk 23,96%";
         } else if (punteggioTotale === 15) {
-            descrizione = "rischio leak anastomotico 25,89%"
+            descrizione = "anastomotic leak risk 25,89%"
         } else if (punteggioTotale === 16) {
-            descrizione = "rischio leak anastomotico 27,91%"
+            descrizione = "anastomotic leak risk 27,91%"
         } else if (punteggioTotale === 17) {
-            descrizione = "rischio leak anastomotico 30,03%";
+            descrizione = "anastomotic leak risk 30,03%";
         } else if (punteggioTotale === 18) {
-            descrizione = "rischio leak anastomotico 32,24%";
+            descrizione = "anastomotic leak risk 32,24%";
         } else if (punteggioTotale === 19) {
-            descrizione = "rischio leak anastomotico 34,53%"
+            descrizione = "anastomotic leak risk 34,53%"
         } else if (punteggioTotale === 20) {
-            descrizione = "rischio leak anastomotico 36,89%"
+            descrizione = "anastomotic leak risk 36,89%"
         } else if (punteggioTotale === 21) {
-            descrizione = "rischio leak anastomotico 39,32%";
+            descrizione = "anastomotic leak risk 39,32%";
         } else if (punteggioTotale === 22) {
-            descrizione = "rischio leak anastomotico 41,8%";
+            descrizione = "anastomotic leak risk 41,8%";
         } else if (punteggioTotale === 23) {
-            descrizione = "rischio leak anastomotico 44,33%"
+            descrizione = "anastomotic leak risk 44,33%"
         } else if (punteggioTotale === 24) {
-            descrizione = "rischio leak anastomotico 46,88%"
+            descrizione = "anastomotic leak risk 46,88%"
         } else if (punteggioTotale === 25) {
-            descrizione = "rischio leak anastomotico 49,25%"
+            descrizione = "anastomotic leak risk 49,25%"
         }
         document.getElementById('punteggioDescrizione').innerText = descrizione;
     }
